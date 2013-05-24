@@ -1,0 +1,146 @@
+<html>
+<head>
+<title>Twitch Console</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" rel="Stylesheet" />
+<style type="text/css">
+body {
+	background-color: black;
+	color: #E8E8E8;
+	font-size: 67.5%;
+}
+
+div.top input[type="submit"],input[type="button"] {
+	top: -3px;
+	left: 2px;
+}
+
+div.left {
+	float: left;
+}
+
+div.right {
+	float: right;
+	width: 320px;
+}
+
+span .stream-list {
+	margin-left: 10px;
+}
+
+div.chat-container {
+	
+}
+</style>
+<script type="text/javascript">
+$(function () {
+	$("#add-stream").button();
+	
+	$("#chat-tabs")
+		.tabs()
+		.delegate( "span.ui-icon-close", "click", function() {
+			removeChat($(this).attr("id"));
+		})
+		.hide();
+});
+
+function addStreamAndChat() {
+	var streamName = $("#stream").val();
+	
+	addStream(streamName);
+	addChat(streamName);
+	
+	$("#stream").val("");
+}
+
+function removeStreamAndChat(streamName) {
+	removeStream(streamName);
+	removeChat("remove-chat-" + streamName);
+}
+
+function addStream(streamName) {
+	var streamRemoveButtonId = "remove-" + streamName;
+	
+	var newStreamRemoveButton = '<span class="stream-listing">';
+	newStreamRemoveButton += '<input id="' + streamRemoveButtonId + '" type="button" class="remove-stream" onclick="removeStreamAndChat(\'' + streamName + '\');" value="Remove ' + streamName + '" />';
+	newStreamRemoveButton += '</span>';
+	
+	$("#stream-list").append(newStreamRemoveButton);
+	$("#" + streamRemoveButtonId).button({
+		icons: {
+			primary: "ui-icon-close"
+		}
+    });
+	
+	var newStreamObject = '<object id="' + streamName + '" type="application/x-shockwave-flash" height="255" width="400" class="stream" data=http://www.twitch.tv/widgets/live_embed_player.swf?channel=' + streamName + '" bgcolor="#000000"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=' + streamName + '&auto_play=true&start_volume=0" /></object>';
+	
+	$("#active-streams").append(newStreamObject);
+}
+
+function removeStream(streamName) {
+	$("#remove-" + streamName).parent().remove();
+	$("#" + streamName).remove();
+}
+
+function addChat(streamName) {
+	var chatTabs = $("#chat-tabs").tabs();
+	
+	var newChatDivId = "chat-" + streamName;
+	
+	var newChatTabsListing = $('<li><a href="#' + newChatDivId + '">' + streamName + '</a><span id="remove-chat-' + streamName + '" class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>');
+	
+	chatTabs.find(".ui-tabs-nav").append(newChatTabsListing);
+	
+	var newChatDiv = '<div id="' + newChatDivId + '" class="chat-container"></div>';
+	
+	chatTabs.append(newChatDiv);
+
+	var newChatIframe = '<iframe frameborder="0" scrolling="no" src="http://twitch.tv/chat/embed?channel=' + streamName + '&popout_chat=true" height="100%" width="100%"></iframe>';
+	
+	$("#" + newChatDivId).append(newChatIframe);
+	
+	chatTabs.tabs("refresh");
+	chatTabs.show();
+}
+
+function removeChat(elementId) {
+	removeTab(elementId);
+	
+	if ($("#chat-list").children().length == 0) {
+		$("#chat-tabs").tabs().hide();
+	}
+}
+
+function removeTab(elementId) {
+	var panelId = $("#" + elementId).closest("li").remove().attr("aria-controls");
+	
+	if (panelId) {
+		$("#" + panelId).remove();
+		$("#chat-tabs").tabs("refresh");
+	}
+}
+</script>
+</head>
+<body>
+
+<div id="topbar" class="top">
+	<span>
+		<input id="stream" type="text" /><input id="add-stream" type="submit" value="Add Stream" onclick="addStreamAndChat();" />
+	</span>
+	<span id="stream-list">
+		
+	</span>
+</div>
+
+<div id="active-streams" class="left">
+	
+</div>
+
+<div id="chat-tabs" class="right">
+	<ul id="chat-list">
+	</ul>
+</div>
+
+</body>
+</html>
