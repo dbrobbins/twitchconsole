@@ -76,3 +76,9 @@ div.chat-container {
 object.stream {
 	padding: 10px;
 }
+
+form.donate {
+	width: 147px;
+	margin-left: auto;
+	margin-right: auto;
+}

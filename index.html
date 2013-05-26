@@ -37,14 +37,27 @@
 				<br />
 				You can share your current set of streams at any time by giving someone else the URL.  The page will keep it up to date as you add and remove streams. <br />
 				<br />
-				Twitch Console was inspired by <a href="http://www.multitwitch.tv">MultiTwitch</a>.
+				<strong>And don't forget to support the streamers by disabling your ad blocker!</strong> 
 			</div>
+			<br />
+			Twitch Console was inspired by <a href="http://www.multitwitch.tv">MultiTwitch</a>.
 		</div>
 	</div>
 
-	<div id="chat-tabs" class="right">
-		<ul id="chat-list">
-		</ul>
+	<div id="chat-tabs-container" class="right">
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-7150529059704793";
+		/* twitchconsole-primary */
+		google_ad_slot = "2929404661";
+		google_ad_width = 336;
+		google_ad_height = 280;
+		//-->
+		</script>
+		<script type="text/javascript"src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+		<div id="chat-tabs">
+			<ul id="chat-list">
+			</ul>
+		</div>
 	</div>
 </div>
 
@@ -63,9 +76,13 @@
 	<br />
 	Donations will go towards costs associated with running this site.  The more I receive, the longer the site can remain available. <br />
 	<br />
-	There is not currently any way for you to donate to this project, but I encourage you to check again later. <br />
-	<br />
-	If you aren't a fan of sending your hard-earned money to strangers, I'm also considering providing a "show me ads" option which will serve a single ad on the page (opt-in only, of course).
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="donate">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	</form>
+	If you aren't a fan of sending your hard-earned money to strangers, I'm also considering providing a "show me ads" option which will serve a single ad on the page (opt-in only, of course).  If that sounds appealing to you then please check back again.
 </div>
 
 </body>
