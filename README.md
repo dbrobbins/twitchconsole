@@ -1,3 +1,7 @@
-TwitchConsole is a simple web page that provides an interface for adding and removing Twitch streams so that any number of arbitrary streams (of your choice) can be watched simultaneously.
+Twitch Console
+==============
+Inspired by MultiTwitch (http://www.multitwitch.tv)
 
-Credit for the seed of the idea goes to bhamrick, who wrote multitwitch.
+Twitch Console is a simple web page that provides an interface for adding and removing Twitch streams so that any number of arbitrary streams (of your choice) can be watched simultaneously.
+
+The content of this project is free to use.
