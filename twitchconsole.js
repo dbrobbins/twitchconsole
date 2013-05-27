@@ -1,4 +1,13 @@
 $(function () {
+	if (!adParamIsTrue()) {
+		$("#chat-ad-container").empty().hide();
+	}
+	
+	$(window).resize(function () {
+		resizeChats();
+		resizeStreams();
+	});
+
 	$("#add-stream").button();
 	
 	$("#chat-tabs")
@@ -73,6 +82,9 @@ function addStreamAndChat(streamName, addToHash) {
 	$("#stream").val("");
 	
 	$("#welcome").hide();
+	
+	resizeChats();
+	resizeStreams();
 }
 
 function removeStreamAndChat(streamName) {
@@ -125,7 +137,7 @@ function addChat(streamName) {
 	
 	chatTabs.append(newChatDiv);
 
-	var newChatIframe = '<iframe frameborder="0" scrolling="no" src="http://twitch.tv/chat/embed?channel=' + streamName + '&popout_chat=true" height="80%" width="100%"></iframe>';
+	var newChatIframe = '<iframe class="chat" frameborder="0" scrolling="no" src="http://twitch.tv/chat/embed?channel=' + streamName + '&popout_chat=true" width="100%"></iframe>';
 	
 	$("#" + newChatDivId).append(newChatIframe);
 	
@@ -139,6 +151,7 @@ function removeChat(elementId) {
 	
 	if (chatBoxIsEmpty()) {
 		$("#chat-tabs").tabs().hide();
+		resizeStreams();
 	}
 }
 
@@ -160,7 +173,7 @@ function chatBoxIsEmpty() {
 }
 
 function getStreamCount() {
-	return $("#active-streams").children("object.stream").length
+	return $("#active-streams").children("object.stream").length;
 }
 
 function streamBoxIsEmpty() {
@@ -201,4 +214,62 @@ function viewOnMultitwitch() {
 	var multitwitchSuffix = streamsSeparatedByCommas.replace(/\,/g,"/");
 	
 	window.location = multitwitch + multitwitchSuffix;
+}
+
+function toggleChat() {
+	$('#chat-tabs').toggle();
+	
+	resizeStreams();
+}
+
+function chatIsVisible() {
+	return $("#chat-tabs").is(":visible");
+}
+
+function toggleAd(checkbox) {
+	if (adParamIsTrue()) {
+		window.location = "?" + window.location.hash;
+	} else {
+		window.location = "?ad=true" + window.location.hash;
+	}
+}
+
+function adParamIsTrue() {
+	return window.location.href.indexOf("ad=true") > -1;
+}
+
+function resizeChats() {
+	var totalHeight = $("body").height();
+	var otherObjectsHeight = $("#topbar").height();
+	if (adParamIsTrue()) {
+		otherObjectsHeight += $("#chat-ad-container").height();
+	}
+	var extraTabsHeight = $("#chat-list").height() + 56;
+	
+	$(".chat").height(totalHeight - otherObjectsHeight - extraTabsHeight);
+}
+
+function resizeStreams() {
+	var totalHeight = $("body").height();
+	var otherObjectsHeight = $("#topbar").height();
+	
+	var totalWidth = $("body").width();
+	var otherObjectsWidth = 0;
+	if (chatIsVisible() || adParamIsTrue()) {
+		otherObjectsWidth = $("#chat-tabs-container").width() + parseInt($("#chat-tabs-container").css("right"));
+	}
+	
+	var streamPadding = 40;
+	
+	var finalWidth = totalWidth - otherObjectsWidth - streamPadding;
+	var finalHeight = (totalHeight - otherObjectsHeight - streamPadding) / getStreamCount();
+	
+	//if (finalWidth * 9/16 < finalHeight) {
+	//	finalHeight = finalWidth * 9/16;
+	//} else {
+	//	finalWidth = finalHeight * 16/9;
+	//}
+
+	$(".stream").height(finalHeight);
+	$(".stream").width(finalWidth);
 }

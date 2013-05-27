@@ -16,7 +16,7 @@
 		</form>
 	</div>
 	<div class="inner-top inner-top-right" style="text-align: right;">
-		<a class="dialog" onclick="openHelp();">Help</a> - <a class="dialog" onclick="openAbout();">About</a> - <a class="dialog" onclick="openDonate();">Donate</a> - <a class="dialog" onclick="viewOnMultitwitch();">View on MultiTwitch</a> - <a class="dialog" onclick="$('#chat-tabs').toggle();">Toggle Chat</a>
+		<a class="dialog" onclick="openHelp();">Help</a> - <a class="dialog" onclick="openAbout();">About</a> - <a class="dialog" onclick="openDonate();">Donate</a> - <a class="dialog" onclick="viewOnMultitwitch();">View on MultiTwitch</a> - Toggle <a class="dialog" onclick="toggleChat();">Chat</a> / <a class="dialog" onclick="toggleAd();">Ad</a>
 	</div>
 	<div id="stream-list" class="inner-top inner-top-mid">
 		
@@ -45,18 +45,22 @@
 	</div>
 
 	<div id="chat-tabs-container" class="right">
-		<script type="text/javascript"><!--
-		google_ad_client = "ca-pub-7150529059704793";
-		/* twitchconsole-primary */
-		google_ad_slot = "2929404661";
-		google_ad_width = 336;
-		google_ad_height = 280;
-		//-->
-		</script>
-		<script type="text/javascript"src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 		<div id="chat-tabs">
 			<ul id="chat-list">
 			</ul>
+		</div>
+		<div id="chat-ad-container" class="ad">
+			<script type="text/javascript"><!--
+			google_ad_client = "ca-pub-7150529059704793";
+			/* twitchconsole-primary */
+			google_ad_slot = "2929404661";
+			google_ad_width = 336;
+			google_ad_height = 280;
+			//-->
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
 		</div>
 	</div>
 </div>
@@ -82,7 +86,7 @@
 		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 	</form>
-	If you aren't a fan of sending your hard-earned money to strangers, I'm also considering providing a "show me ads" option which will serve a single ad on the page (opt-in only, of course).  If that sounds appealing to you then please check back again.
+	If you aren't a fan of sending your hard-earned money to strangers, you can also just click the "Toggle Ad" link to refresh the page and display a single ad to help support the site.  Don't forget to disable your ad blocker if you do!
 </div>
 
 </body>

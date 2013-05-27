@@ -6,11 +6,12 @@ div.top{width:100%}
 div.top input[type=submit],input[type=button]{top:-3px;left:2px}
 div.top div.inner-top{vertical-align:top}
 div.top div.inner-top-left{float:left;width:280px}
-div.top div.inner-top-mid{margin-left:290px;margin-right:310px}
-div.top div.inner-top-right{float:right;width:310px}
+div.top div.inner-top-mid{margin-left:290px;margin-right:330px}
+div.top div.inner-top-right{float:right;width:330px;padding-top:5px}
 div.content{float:left;width:100%}
 div.left{float:left;margin-right:400px}
 div.right{position:absolute;right:2px;width:340px}
 span .stream-list{margin-left:10px}
 object.stream{padding:10px}
 form.donate{width:147px;margin-left:auto;margin-right:auto}
+div.ad{width:336px;height:280px}
